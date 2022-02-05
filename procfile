@@ -1,1 +1,1 @@
-web: gunicorn codenet.wsgi
+web: gunicorn app:app
