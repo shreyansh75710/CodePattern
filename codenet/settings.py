@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--z-$tqx@*cxvi=c%)o*+g@d9l38m!k3(n&gz-*0s1saaczqebw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 LOGIN_URL = '/auth/login'
 
@@ -29,8 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'authentication.apps.AuthenticationConfig',
-    'base.apps.BaseConfig',
+    'authentication',
+    'base',
 ]
 
 MIDDLEWARE = [
