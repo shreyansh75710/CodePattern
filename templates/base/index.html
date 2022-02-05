@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="container">
+    <h4>Theory Notes</h4>
+
+    <div class="collection">
+        {% for note in theoryNotes %}
+            <a href="{% url 'noteView' note.id %}" class="collection-item avatar">
+                <span ><i class="material-icons circle red">picture_as_pdf</i></span>
+                <p>{{note.title}}</p>
+                <strong>@{{note.user.username}}</strong>
+            </a>
+        {% endfor %}
+    </div>
+
+    <h4>Code Snippets </h4>
+    <a class="btn btn-default" href="{% url 'codeCreate' %}">Add a code Snippet</a>
+    <div class="row">
+        <form class="col s12" metod="GET">
+            <div class="row">
+                <input type="text" class="col s10" placeholder="Search for questions or username " name="query">     
+                <button class="btn-floating btn-med waves-effect waves-light right" type="submit">
+                    <i class="material-icons">search</i>
+                </button>
+            </div>
+        </form>
+        {% for codeSnippet in codeSnippets %}
+            <div class="col s12 m6">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                    <p>{{codeSnippet.question}}</p>
+                    <br><strong>@{{codeSnippet.user}}</strong>
+                    </div>
+                    <div class="card-action">
+                        <a href="{% url 'codeView' codeSnippet.id %}"> View Code</a>
+                        {% if request.user == codeSnippet.user %}
+                        <a href="{% url 'codeUpdate' codeSnippet.id %}"> Edit</a>
+                        <a href="{% url 'codeDelete' codeSnippet.id %}"> Delete</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
