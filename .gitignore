@@ -1,11 +1,3 @@
-# Distribution / packaging
-.Python
-venv/
-env1/
-*.sqlite3
-.idea/
-# Project asset folders
-
 # Database
 db.sqlite3
 # Editor directories and files
