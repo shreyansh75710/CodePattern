@@ -5,43 +5,42 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-java.min.js"></script>
 
 <div class="container">
-<h5>{{codeSnippet.question}}</h5>
-@{{codeSnippet.user}}
-<pre>
-<code class="language-java line-numbers">{{codeSnippet.solution}}</code>
-</pre>
+  <h5>{{codeSnippet.question}}</h5>
+  @{{codeSnippet.user}}
+  <pre>
+  <code class="language-java line-numbers">{{codeSnippet.solution}}</code>
+  </pre>
+  <br>
+  <a href="whatsapp://send?text={{request.scheme}}://{{request.get_host}}{% url 'codeView' codeSnippet.id%}">Share on whatsapp</a>
+  <br>
+      
+  <div class="row">
+    <div class="card small " style="height:10%">
+      <div class="card-content">
+          <span class="card-title">Add a Comment</span>
+          <form method="POST" action="">
+              {% csrf_token %}
+              <input type="text" name="comment">
+              <input type="submit" value="Upload Comment">
+          </form>
+          <a>@{{request.user.username}}</a>
+      </div>
+    </div>
+  </div>
 
-</div>
-<br>
-<div class="container">
-    
-        <div class="row">
-          <div class="card small " style="height:10%">
-            <div class="card-content">
-                <span class="card-title">Add a Comment</span>
-                <form method="POST" action="">
-                    {% csrf_token %}
-                    <input type="text" name="comment">
-                    <input type="submit" value="Upload Comment">
-                </form>
-                <a>@{{request.user.username}}</a>
-            </div>
-          </div>
-        </div>
+      
+          
 
-    
-        
-
-        {% for comment in comments %}
-        <div class="section">
-            <h6>@{{comment.user.username}}</h6>
-            <p>{{comment.comment}}</p>
-            {%if request.user == comment.user%}
-            <a href="{% url 'deleteComment' comment.id %}">Delete this comment</a>
-            {% endif %}
-        <div class="section">
-        <div class="divider"></div>
-        {% endfor %}
+  {% for comment in comments %}
+  <div class="section">
+      <h6>@{{comment.user.username}}</h6>
+      <p>{{comment.comment}}</p>
+      {%if request.user == comment.user%}
+      <a href="{% url 'deleteComment' comment.id %}">Delete this comment</a>
+      {% endif %}
+  </div>
+  <div class="divider"></div>
+  {% endfor %}
 
 </div>
 
