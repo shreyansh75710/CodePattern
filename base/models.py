@@ -34,5 +34,13 @@ class theoryNote(models.Model):
     link = models.CharField(max_length = 100)
     created = models.DateField(auto_now=True)
 
-    def __Str__(self):
+    def __str__(self):
         return self.title
+
+class feedback(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    description = models.TextField(null=False, blank=False)
+    created = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.user.username+"_Feedback"

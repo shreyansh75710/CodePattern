@@ -4,3 +4,4 @@ from . import models
 admin.site.register(models.codeSnippet)
 admin.site.register(models.comment)
 admin.site.register(models.theoryNote)
+admin.site.register(models.feedback)
