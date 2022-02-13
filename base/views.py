@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import codeSnippet, comment, theoryNote
+from .models import codeSnippet, comment, theoryNote, feedback as fb
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
@@ -37,6 +37,15 @@ def codeView(request, pk):
         Comment.save()
     comments = comment.objects.filter(codeSnippet=CodeSnippet)
     return render(request, 'base/codeView.html', {'codeSnippet':CodeSnippet,'comments':comments})
+
+@login_required
+def feedback(request):
+    if request.method == 'POST':
+        description = request.POST.get("feedback")
+        Feedback = fb(user=request.user, description=description)
+        Feedback.save()
+        messages.add_message(request, messages.SUCCESS, "Feedback submitted")
+    return redirect("index")
 
 @login_required
 def codeUpdate(request, pk):

@@ -9,4 +9,5 @@ urlpatterns = [
     path('codeUpdate/<int:pk>/', views.codeUpdate, name='codeUpdate'),
     path('codeDelete/<int:pk>/', views.codeDelete, name='codeDelete'),
     path('deleteComment/<int:pk>/', views.deleteComment, name="deleteComment"),
+    path('feedback/', views.feedback, name='feedback'),
 ]

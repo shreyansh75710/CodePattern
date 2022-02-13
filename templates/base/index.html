@@ -18,7 +18,7 @@
     <h4>Code Snippets </h4>
     <a class="btn btn-default" href="{% url 'codeCreate' %}">Add a code Snippet</a>
     <div class="row">
-        <form class="col s12" metod="GET">
+        <form class="col s12" method="GET">
             <div class="row">
                 <input type="text" class="col s10" placeholder="Search for questions or username " name="query">     
                 <button class="btn-floating btn-med waves-effect waves-light right" type="submit">
@@ -44,6 +44,23 @@
             </div>
         {% endfor %}
     </div>
+    
+    <div class="row">
+        <div class="card small " style="height:10%">
+          <div class="card-content">
+              <span class="card-title">Provide your valuable Feedback</span>
+              <form method="POST" action="{% url 'feedback' %}">
+                  {% csrf_token %}
+                  <input type="text" name="feedback">
+                  <button class="btn-floating btn-med waves-effect waves-light right" type="submit">
+                    <i class="material-icons">send</i>
+                </button>
+              </form>
+              <a >@{{request.user.username}}</a>
+          </div>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}
