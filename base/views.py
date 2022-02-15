@@ -3,6 +3,11 @@ from .models import codeSnippet, comment, theoryNote, feedback as fb
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
+import requests
+
+def sendMessage(token, msg, chat_id):
+    url = "https://api.telegram.org/bot{}/sendMessage?text={}&chat_id={}".format(token, msg, chat_id)
+    requests.get(url)
 
 # Create your views here.
 def index(request):
@@ -45,6 +50,11 @@ def feedback(request):
         Feedback = fb(user=request.user, description=description)
         Feedback.save()
         messages.add_message(request, messages.SUCCESS, "Feedback submitted")
+        sendMessage(
+            "5189389049:AAGNOFb4zsS6wKQOui2WmiNwtzFIFOmckQo", 
+            "New Feedback\n\"{}\"\n@{}".format(Feedback.description,Feedback.user), 
+            "1385528751"
+        )
     return redirect("index")
 
 @login_required
