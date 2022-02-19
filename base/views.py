@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 import requests
+import os
 
 def sendMessage(token, msg, chat_id):
     url = "https://api.telegram.org/bot{}/sendMessage?text={}&chat_id={}".format(token, msg, chat_id)
@@ -51,7 +52,7 @@ def feedback(request):
         Feedback.save()
         messages.add_message(request, messages.SUCCESS, "Feedback submitted")
         sendMessage(
-            "5189389049:AAGNOFb4zsS6wKQOui2WmiNwtzFIFOmckQo", 
+            str(os.environ.get('telegramToken')),
             "New Feedback\n\"{}\"\n@{}".format(Feedback.description,Feedback.user), 
             "1385528751"
         )
