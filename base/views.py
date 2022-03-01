@@ -16,8 +16,8 @@ def index(request):
     query  = request.GET.get('query')
     if query is not None:
         codeSnippets = codeSnippet.objects.filter(
-            Q(question__contains=query) |
-            Q(user__username__contains=query)
+            Q(question__icontains=query) |
+            Q(user__username__icontains=query)
         )
     else:
         codeSnippets = codeSnippet.objects.all()
